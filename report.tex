@@ -9,7 +9,15 @@
 \usepackage{bm}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{ulem}
+\usepackage{color}
 %\bibliographystyle{plainnat}
+
+
+\newcommand{\vmdel}[1]{\sout{#1}}
+\newcommand{\vmadd}[1]{\textbf{\color{red}{#1}}}
+\newcommand{\vmcomment}[1]{({\color{blue}{VM's comment:}} \textbf{\color{blue}{#1}})}
+
 
 \begin{document}
 %%\maketitle
@@ -26,9 +34,10 @@
 
 Finite state continuous-time processes, with data being observed at irregularly spaced discrete time points, and no data on the trajectory of the process between these times (panel observed), are often encountered in practice. Examples are medical research on characterising the evolution of a disease within an individual (progressive disease like HIV (Longini \& Clark, 1989), or, episodic disease with recurrent transitions like asthma (Saint-Pierre et al., 2003)), when disease statuses are recorded only at clinic visits, and exact transition times are unknown (Dean et al., 2009; Mandel, 2010).
 %These histories can be conceptualized as consisting of waiting times (sojourns) in discrete states that individuals pass through according to progressive or reversible transitions; the final transition is to the absorbing state, death.
-Time-homogeneous continuous time Markov chains (CTMCs) are the simplest and most tractable models in such scenario (Kalbfleisch and Lawless, 1985). However homogeneous CTMCs have limiting restrictions of transition intensities constant over time and thereby exponential sojourn distributions, which is often unrealistic.
+Time-homogeneous continuous time Markov chains (CTMCs) are the simplest and most tractable models in such scenari\vmdel{o}\vmadd{a} (Kalbfleisch and Lawless, 1985). However homogeneous CTMCs have limiting restrictions of transition intensities constant over time and thereby exponential sojourn distributions, which is often unrealistic.
 
-Inhomogeneous CTMCs (Kay, 1986; Hubbard, Inoue, and Fann, 2008; Titman, 2011) extend the setup to have transition intensities vary with respect to time since the process origin. But for diseases, often transition intensities may depend on the time spent in the current state (sojourn time), not just external time. Semi-Markov models have such a property and are considered by Titman \& Sharples (2010) (Cox \& Miller 1965; McGilchrist \& Hills 1991).
+Inhomogeneous CTMCs (Kay, 1986; Hubbard, Inoue, and Fann, 2008; Titman, 2011) extend the setup to have transition intensities vary with respect to time since the process origin. 
+But for diseases\vmdel{, often} transition intensities \vmadd{oftern} may depend on the time spent in the current state (sojourn time), not just external time. Semi-Markov models have such a property and are considered by Titman \& Sharples (2010) (Cox \& Miller 1965; McGilchrist \& Hills 1991).
 
 Although semi-Markov models are appealing, there are computational hurdles documented in fitting them to data. The likelihood is less tractable for observed panel data unless the model is assumed to be progressive, where a subject cannot reenter a state once exited (Joly and Commenges, 1999; Foucher et al., 2010). In the presence of reversible transitions, semi-Markov models are tractable only under stringent restrictions of an evenly spaced two-state recurrent model (Rosychuk and Thompson; 2001), or, if at least one state has exponential sojourn distribution (Kang, Lagakos; 2007).
 

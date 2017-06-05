@@ -1,9 +1,9 @@
 \documentclass{uwstat572}
 
-%%\setlength{\oddsidemargin}{0.25in}
-%%\setlength{\textwidth}{6in}
-%%\setlength{\topmargin}{0.5in}
-%%\setlength{\textheight}{9in}
+%\setlength{\oddsidemargin}{0.25in}
+%\setlength{\textwidth}{6in}
+%\setlength{\topmargin}{0.5in}
+%\setlength{\textheight}{9in}
 
 \renewcommand{\baselinestretch}{1.5} 
 \usepackage{bm}
@@ -32,6 +32,8 @@
 \abstract{}
 \section{Introduction}
 
+\vmcomment{Please do not modify my LaTex template, your margins are too wide for some reason. Stick to my original style file}
+
 Finite state continuous-time processes, with data being observed at irregularly spaced discrete time points, and no data on the trajectory of the process between these times (panel observed), are often encountered in practice. Examples are medical research on characterising the evolution of a disease within an individual (progressive disease like HIV (Longini \& Clark, 1989), or, episodic disease with recurrent transitions like asthma (Saint-Pierre et al., 2003)), when disease statuses are recorded only at clinic visits, and exact transition times are unknown (Dean et al., 2009; Mandel, 2010).
 %These histories can be conceptualized as consisting of waiting times (sojourns) in discrete states that individuals pass through according to progressive or reversible transitions; the final transition is to the absorbing state, death.
 Time-homogeneous continuous time Markov chains (CTMCs) are the simplest and most tractable models in such scenari\vmdel{o}\vmadd{a} (Kalbfleisch and Lawless, 1985). However homogeneous CTMCs have limiting restrictions of transition intensities constant over time and thereby exponential sojourn distributions, which is often unrealistic.
@@ -42,10 +44,13 @@ But for diseases\vmdel{, often} transition intensities \vmadd{oftern} may depend
 Although semi-Markov models are appealing, there are computational hurdles documented in fitting them to data. The likelihood is less tractable for observed panel data unless the model is assumed to be progressive, where a subject cannot reenter a state once exited (Joly and Commenges, 1999; Foucher et al., 2010). In the presence of reversible transitions, semi-Markov models are tractable only under stringent restrictions of an evenly spaced two-state recurrent model (Rosychuk and Thompson; 2001), or, if at least one state has exponential sojourn distribution (Kang, Lagakos; 2007).
 
 %Crespi et al. (2005) recorded computational advantages in using a latent birth-death process of symptom recurrences  to model a two state health-diseased process. The resulting two-state health-diseased process was semi-Markov. But the latent structure allowed the likelihood can be expressed to have the same form as a hidden Markov model (HMM), thereby enabling usage of well-developed computational techniques for HMM. Titman \& Sharples in the current paper developed a general methodology for semi-Markov modelling and inference using such latent CTMC.
-Titman and Sharples in their paper (2010) proposed a general approach to semi-Markov modeling and fitting to panel observed processes using a latent state CTMC. Each state maps to multiple latent states, which are traversed according to an underlying CTMC. This framework yields rates of transition between states that depend on the duration spent in that state, yet likelihoods are analytically tractable, even for disease processes with reversible transitions. The model is extended to incorporate misclassification error. Methods for inference of parameters while addressing non-identifiability concerns are discussed. The methods are applied to assess development of bronchilitis obliterans syndrome in post-lung-transpantation patients, making comparison with the standard popular method based on HMM. The quantities of scientific interest studied are the rate of disease onset, survival rates of patients before and after disease onset given survived for certain years after onset, and, extent of misclassification, which are one-dimensional functionals of the model parameters.
+Titman and Sharples in their paper (2010) proposed a general approach to semi-Markov modeling and fitting to panel observed processes using a latent state CTMC. 
+\vmcomment{Don't hardcode your references! Learn how to use bibtex, please!}
+Each state maps to multiple latent states, which are traversed according to an underlying CTMC. This framework yields rates of transition\vmadd{s} between states that depend on the duration spent in that state, yet likelihoods are analytically tractable, even for disease processes with reversible transitions. The model is extended to incorporate misclassification error. Methods for inference of parameters while addressing non-identifiability concerns are discussed. The methods are applied to assess development of bronchilitis obliterans syndrome in post-lung-transpantation patients, \vmdel{making} \vmadd{and are} compar\vmadd{ed}\vmdel{ison} with the standard popular method based on HMM. The quantities of scientific interest studied are the rate of disease onset, survival rates of patients before and after disease onset given survived for certain years after onset, and, extent of misclassification, which are one-dimensional functionals of the model parameters.
+\vmcomment{Try to use less of the passive voice in your writing}
 
 
-In contrast to the restriction of Exponential sojourn distributions in homogeneous CTMCs, the sojourn-time of observable states in such latent CTMC setup has a phase-type distribution, defined as the distribution of absorption time of a homogeneous CTMC with finitely many transient states and one absorbing state. An advantage is generality, as phase type distributions are dense in the class of all distributions with non-negative support, so any distribution with non-negative support can be approximated by a phase-type distribution (Neuts, 1974). Analytic tractability is also ensured with density, cumulative distribution function and failure rate being matrix exponentials. One disadvantage is that the model parameters may not be identifiable (Asmussen et al., 1996), which is a difficulty in frequentist estimation, but, typical scientifically meaningful functionals of sojourn distribution parameters are identifiable (Bladt et. al, 2003). Titman \& Sharples (2010) constrained the latent CTMC parameters to yield a sojourn distribution from a subclass of phase type distributions called Coxian phase-type distribution (details are in Section 2.3) which largely provides similar approximations to distributions as the general phase-type class while being faster for computation (Asmussen etl al, 1996).
+In contrast to the restriction of \vmdel{E}\vmadd{e}xponential\vmadd{ly distributed} sojourn distributions in homogeneous CTMCs, the sojourn-time of observable states in such latent CTMC setup has a phase-type distribution, defined as the distribution of absorption time of a homogeneous CTMC with finitely many transient states and one absorbing state. An advantage is generality, as phase type distributions are dense in the class of all distributions with non-negative support, so any distribution with non-negative support can be approximated by a phase-type distribution (Neuts, 1974). Analytic tractability is also ensured with density, cumulative distribution function and failure rate being matrix exponentials. One disadvantage is that the model parameters may not be identifiable (Asmussen et al., 1996), which is a difficulty in frequentist estimation, but, typical scientifically meaningful functionals of sojourn distribution parameters are identifiable (Bladt et. al, 2003). Titman \& Sharples (2010) constrained the latent CTMC parameters to yield a sojourn distribution from a subclass of phase type distributions called Coxian phase-type distribution (details are in Section 2.3) which largely provides similar approximations to distributions as the general phase-type class while being faster for computation (Asmussen etl al, 1996).
 
 
 %extension to phase type distribution from coxian phase-type immediate? maybe want to have a specific sojourn distribution for example the one in asmussen paper where coxian one fared poorly, maybe consider such an example where there is motivation for a prespecified sojourn distribution? :P general is always better. - showing it gives better fit for general phase type distribution
@@ -61,22 +66,22 @@ In contrast to the restriction of Exponential sojourn distributions in homogeneo
 \subsection{Likelihood for Continuous-time processes with panel data}
 Let $X(t)$ denote the continous-time discrete state stochastic process on a finite state space $\{1,\ldots,R\}$, and  observed data for an individual subject consist of observed states $x_0 ,\ldots, x_n$ at times (can be irregular) $t_0,\ldots,t_n$ where time points and number of times $n$ can be subject specific. The data is panel observed at discrete time points with no information about the trajectory of the process between observations. It is assumed throughout, that, the sampling mechanism from the continuous process is non-informative (Gruger, Kay, Schumacher, 1991).
 
-General finite state continuous-time models may be defined according to the transition intensities from states $r$ to $s$
+General finite state continuous-time models may be defined according to the transition intensities from states $r$ to $s$\vmadd{:}
 \[
-q_{rs}(t,\mathcal{F}_t) =\lim_{\delta t \downarrow 0} \frac{P(X(t+\delta t)=s|X(t) = r, \mathcal{F}_t)}{\delta t}
+q_{rs}(t,\mathcal{F}_t) =\lim_{\delta t \downarrow 0} \frac{P(X(t+\delta t)=s|X(t) = r, \mathcal{F}_t)}{\delta t}\vmadd{,}
 \]
-where $\mathcal{F}_t$ is the filtration or past history of the process up to time $t$.
+where $\mathcal{F}_t$ is the filtration or past history of the process up to time $t$. \vmcomment{Math equations are still parts of sentences and need punctuation.} 
 
 Under a Markov assumption (Kalbfleisch and Lawless, 1985), the transition intensities are only a function of $t$ and the likelihood for an individual is
 \[
-L(\theta) = \prod_{i=1}^n p_{x_{i-1},x_i} (t_{i-1},t_i;\theta)
+L(\theta) = \prod_{i=1}^n p_{x_{i-1},x_i} (t_{i-1},t_i;\theta)\vmadd{,}
 \]
-where $p_{x_{i-1},x_i} (t_{i-1},t_i;\theta)=P(X(t_i)=x_i | X(t_{i-1})=x_{i-1})$ are the transition probabilities. The transition probabilities can be expressed in terms of the transition intensities by solving the Kolmogorov forward equations (Cox \& Miller; 1965). If time homogeneous, they are related through a matrix exponential.
+where $p_{x_{i-1},x_i} (t_{i-1},t_i;\theta)=P(X(t_i)=x_i | X(t_{i-1})=x_{i-1})$ are the transition probabilities. The transition probabilities can be expressed in terms of the transition intensities by solving the Kolmogorov forward equations (Cox \& Miller; 1965). If time homogeneous, \vmdel{they} \vmadd{transition probabilities and intensities} are related through a matrix exponential. 
 
-\subsection{Semi-markov models}
+\subsection{Semi-\vmdel{m}\vmadd{M}arkov models}
 In a semi-Markov model the transition intensities depend on the time spent in the current state
 \[
-q_{rs}(t,\mathcal{F}_t)=q_{rs} (u) = \lim_{\delta t \downarrow 0} \frac{P(X(t+\delta t) = s | X_i (t) = r, T^* = t-u)}{\delta t}
+q_{rs}(t,\mathcal{F}_t)=q_{rs} (u) = \lim_{\delta t \downarrow 0} \frac{P(X(t+\delta t) = s | X_i (t) = r, T^* = t-u)}{\delta t}\vmadd{,}
 \]
 where $T^*$ denotes the time since entry into the current state. In semi-Markov models the sojourn times in each state are not constrained to have exponential distributions in contrast to time homogeneous Markov models. Titman \& Sharples specify the sojourn distribution of $X(t)$ to be of Coxian phase-type (See Section 2.3).
 
@@ -90,7 +95,9 @@ For more general models with reverse transitions, direct integration is not poss
 \includegraphics[scale=0.5]{coxmodelstitched2.png}
 \caption{This figure summarizes the transition diagram of the underlying process $X^*(t)$. $r$, $s$ are any transient state of $X(t)$ with underlying $X^*(t)$ states $r_1,\ldots,r_k$ and $s_1,\ldots,s_k$ respectively, and $R$ is the only absorbing state.}
 \end{figure}
-Recall that $X(t)$ denotes a continuous time stochastic process with state space $\{1,\ldots, R\}$, where $t$ is time since process origin. Let $R$ be the only absorbing state. Underlying $X(t)$ there is the latent homogeneous CTMC $X^*(t)$ with latent state space $\{1_1,\ldots1_{s_1}\}\cup \ldots \cup \{(R-1)_1,\ldots (R-1)_{s_{R-1}} \cup R\} $. $X(t)=r \Leftrightarrow X^*(t) \in \{r_1,\ldots r_{s_r}\}$ for $r<R$ and $X(t)=R \Leftrightarrow X^*(t) =R$. The sojourn distribution of each non-absorbing state $r$ of $X(t)$ is assumed to be a $k$-phase Coxian phase-type distribution, defined to be the distribution of absorption time of a CTMC with $k$ progressive states and one absorbing state. Thus for observable state $r$, the latent process $X^* (t)$ can have the states $r_1,\ldots,r_k$,  with parameters $\lambda_{r_j} =$ the intensity for movement from $r_j$ to $r_{j+1}$, for $j=1,\ldots, k-1$, with the assumption that these latent phases for each observable state is progressive thereby all other transitions between $r_j$'s have $0$ intensity, and $\mu_{r_j s}=$, the intensity for movement out of a latent phase of $r_j$ to state $s$ with the assumption that any state $s$ is entered only at latent phase $s_1$, thereby all other intensities for transition from latent phases of $r$ to latent phases of $s$ are $0$. Figure 1 summarizes the transition diagram of the underlying process $X^*(t)$. For greater estimability and interpretation of moving out of a state to another it is assumed that $\mu_{r_j s} = \tau_{r_j} \mu_{r_1 s} \forall s$, $\tau_{r_1}=1$. That is rates of exiting from latent phase $r_j$ relative to $r_1$ change by the same factor irrespective of destination. It is noted that the resulting $X(t)$ is a semi-Markov process.
+Recall that $X(t)$ denotes a continuous time stochastic process with state space $\{1,\ldots, R\}$, where $t$ is time since process origin. Let $R$ be the only absorbing state. Underlying $X(t)$ there is the latent homogeneous CTMC $X^*(t)$ with latent state space $\{1_1,\ldots1_{s_1}\}\cup \ldots \cup \{(R-1)_1,\ldots (R-1)_{s_{R-1}} \cup R\} $. $X(t)=r \Leftrightarrow X^*(t) \in \{r_1,\ldots r_{s_r}\}$ for $r<R$ and $X(t)=R \Leftrightarrow X^*(t) =R$. The sojourn distribution of each non-absorbing state $r$ of $X(t)$ is assumed to be a $k$-phase Coxian phase-type distribution, defined to be the distribution of absorption time of a CTMC with $k$ progressive states and one absorbing state. Thus for observable state $r$, the latent process $X^* (t)$ can have the states $r_1,\ldots,r_k$,  with parameters $\lambda_{r_j} =$ the intensity for movement from $r_j$ to $r_{j+1}$, for $j=1,\ldots, k-1$, with the assumption that these latent phases for each observable state is progressive thereby all other transitions between $r_j$'s have $0$ intensity, and $\mu_{r_j s}=$, the intensity for movement out of a latent phase of $r_j$ to state $s$ with the assumption that any state $s$ is entered only at latent phase $s_1$, thereby all other intensities for transition from latent phases of $r$ to latent phases of $s$ are $0$. 
+\vmcomment{This is an insanely long sentence and impossible to parse. Also, do not say $\lambda =$ and then put definition of it in words. Treat $\lambda$ as a noun and use it in a sentence properly, using ``is equal" to instead fo $=$.}
+Figure 1 summarizes the transition diagram of the underlying process $X^*(t)$. For greater estimability and interpretation of moving out of a state to another it is assumed that $\mu_{r_j s} = \tau_{r_j} \mu_{r_1 s} \forall s$, $\tau_{r_1}=1$. That is rates of exiting from latent phase $r_j$ relative to $r_1$ change by the same factor irrespective of destination. It is noted that the resulting $X(t)$ is a semi-Markov process.
 
 \begin{figure}[t]
 
@@ -98,19 +105,19 @@ Recall that $X(t)$ denotes a continuous time stochastic process with state space
 \caption{This is an illustration of a disease process with latent trajectory $X^*(t)$, corresponding disease trajectory $X(t)$, and misclassified trajectory $O(t)$. The three states of the disease process $X(t)$ : \{1=healthy, 2= BOS, 3=death\} with $3$ the only absorbing state. $X(t)$ has underlying latent homogeneous CTMC $X^*(t)$ with state space $S^*=\{1_1,1_2,2_1,2_2,3\}$ with $\{3\}$ an absorbing state and rest transient. $O(t)$ is the observed process which is the misclassified version of $X(t)$. States which are misclassified in this example are marked in red.}
 \end{figure}
 
-To incorporate that the states in the process are observed with misclassification error, it is considered that observed states are $O(t)$ which are related to $X(t)$ by taking a value with misclassification probability $e_{rs}=P(O(t)=s|X(t) =r)=P(O(t)=s|X^* (t) =r_j) = e^*_{r_j s}$ for $r,s = 1,\ldots,R$, $j=1,\ldots, k$. It is noted that the process $(O(t), X^*(t))$ is a Hidden Markov Model (HMM). Thereby computational methods tailored for HMM can be used for inference. Figure 2 shows an example of a disease process with latent trajectory $X^*(t)$ and the corresponding disease trajectory $X(t)$ and misclassified trajectory $O(t)$ for a two-state reversible disease model.
+To incorporate that the states in the process are observed with misclassification error, it is considered that observed states are $O(t)$ which are related to $X(t)$ by taking a value with misclassification probability $e_{rs}=P(O(t)=s|X(t) =r)=P(O(t)=s|X^* (t) =r_j) = e^*_{r_j s}$ for $r,s = 1,\ldots,R$, $j=1,\ldots, k$. It is noted that the process $(O(t), X^*(t))$ is a Hidden Markov Model (HMM). Thereby computational methods tailored for \vmadd{statistical analysis of} HMM\vmadd{s} can be used for inference. Figure 2 shows an example of a disease process with latent trajectory $X^*(t)$ and the corresponding disease trajectory $X(t)$ and misclassified trajectory $O(t)$ for a two-state reversible disease model.
 
 
 \subsection{Inference and Identifiability}
 
-Denoting $o_0,\ldots, o_{n}$ to be the sampled observations with misclassification at times $t_0,\ldots,t_{n}$ for an individual, the latent HMM structure of the model enables to write the likelihood contribution for the individual based on the forward-backward algorithm, as follows.
+Denoting $o_0,\ldots, o_{n}$ to be the sampled observations with misclassification at times $t_0,\ldots,t_{n}$ for an individual, the latent HMM structure of the model enables to write the likelihood contribution for the individual based on the forward-backward algorithm, as follows\vmdel{.}\vmadd{:}
 
 \begin{equation}
-L=\pi \bm{M}_1^* \bm{M}_2^* \ldots \bm{M}_{n}^* \bm{1}
+L=\pi \bm{M}_1^* \bm{M}_2^* \ldots \bm{M}_{n}^* \bm{1}\vmadd{,}
 \end{equation}
-where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s^*)$ entry $e^*_{s^* o_i} p^*_{r^* s^*} (t_i - t_{i-1})$ for $r^*, s^* \in S^*$, with $P^*(t)=((p^*_{r^* s^*})) = e^{\bm{\Lambda}t}$,  and, $\pi$ is the initial state distribution.
+where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s^*)$ entry $e^*_{s^* o_i} p^*_{r^* s^*} (t_i - t_{i-1})$ for $r^*, s^* \in S^*$, with \vmadd{$\mathbf{P}^*(t)=\left\{p^*_{r^* s^*}(t)\right\} = e^{\bm{\Lambda}t}$},  and, $\pi$ is the initial state distribution.
 
-The presence of misclassification and HMM setup increases possibility of non-identifiability (MacDonald \& Zucchini, 1997). In fact for a HMM with two states and balanced pbservation times, it is not possible to simultaneously identify the misclassification probabilities and transition intensities or probabilities without putting constraints, for instance that misclassification probabilities are each $<0.5$ (Rosychuk \& Thompson, 2003).
+The presence of misclassification and HMM setup increases possibility of non-identifiability (MacDonald \& Zucchini, 1997). In fact for a HMM with two states and balanced \vmdel{p}\vmadd{o}bservation times, it is not possible to simultaneously identify the misclassification probabilities and transition intensities or probabilities without putting constraints, for instance that misclassification probabilities are each $<0.5$ (Rosychuk \& Thompson, 2003).
 
 In addition, the Coxian phase-type structure induces non-identifiability. For example, the sojourn time distribution for state r is exponential if $\tau_{r_j} = 1 \forall j = 1,\ldots , k$. The parameters, $\lambda_{r_j}, j = 1,...,k - 1$, are redundant and unidentifiable in this situation.
 

@@ -234,12 +234,20 @@ We computed the MLE by the HSMM model over 30 random starting values from indepe
 A Pearson-type goodness of fit test (Titman \& Sharples; 2008, See Appendix D) for the HSMM  model stratified by transplant type (heart lung or double lung), observation number in an individual’s series ($\leq 6$ or $>6$), time elapsed since last observation (for observation number $\leq 6$, time elapsed categories : $\leq 0.44$ years, $> 0.44$ years. for observation number $> 6$ and time elapsed categories : $\leq 0.51$ years, $> 0.51$ years). The statistic had a value of 36.92. The null distribution of the statistic cannot be accurately calculated without bootstrapping, which would be time consuming for the current algorithm. However $\chi^2(D) (0.95)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells. In this case $D = 32$ which gives the upper bound as 46.2. Thus this test does not provide strong evidence in favor of poor fit. The goodness of fit test in the HMM setup gives evidence for a poor fit with test statistic of 96.81 on $\chi^2_{24}$ distribution.
 
 
-\begin{table}
+
+We performed an hypothesis test with null hypothesis of HMM versus an alternative of HSMM by a modified likelihood ratio test based on Chen et al., 2001 (Appendix C). The value of the test statistic was 25.18. The test statistic has an approximate $\chi^2(2)$ distribution whose $95\%$ quantile is nearly $5.99$. Therefore, this shows strong evidence against the HMM model in favor of the HSMM model.
+
+
+\begin{table}[h]
 \centering
-\resizebox{5.5 in}{!}{%
+\caption{This is a demonstration of non-identifiability of the likelihood for the BOS dataset. Two different parameter sets lead to approximately the same likelihood.}\vspace{4mm}
+\resizebox{6 in}{!}{%
 \begin{tabular}{cccccccccccccc}
 \hline
-$\lambda_1$ & $\mu_{1_1 2}$ & $\mu_{1_1 3}$ & $\tau_{1_2}$ & $\lambda_2$ & $\mu_{2_1 1}$ & $\mu_{2_1 3}$ & $\tau_{2_2}$ & $e_{21}$ & $e_{12}^{HL}$ & $e_{12}^{DL}$ & $\pi_{HL}$ & $\pi_{DL}$ & $-LL$\\
+\multicolumn{8}{c}{Transition intensities} & \multicolumn{3}{c}{Emission probabilities} & \multicolumn{2}{c}{Initial distribution} & \\ 
+
+$1_1 \rightarrow 1_2$ & $1_1\rightarrow 2_1$ & $1_1\rightarrow 3$ & $\tau_{1_2}$ & $2_1 \rightarrow 2_2$ & $2_1 \rightarrow 1_1$ & $2_1\rightarrow 3$ & $\tau_{2_2}$ & e(BOS,healthy) & \multicolumn{2}{c}{e(Healthy, BOS)} & \multicolumn{2}{c}{$\pi(\mbox{BOS}_1)$}  & $-LL$\\
+\multicolumn{8}{c}{} & & Heart lung & Double lung & Heart lung & Double lung & \\
 \hline
 0.12 &  0.34 &  0.00 & 0.27 & 36.25 &  1.24 &  8.51 &  0.03 &  0.01 &  0.51 &  0.80 & 0.53 & 0.56 & 1615.143\\
 0.26 & 0.35 & 0.03  & 0.37 & 5.11 & 0.18 & 1.31 & 0.16 & 0.01 & 0.51 & 0.79 & 0.52 & 0.77 & 1615.261\\
@@ -247,16 +255,14 @@ $\lambda_1$ & $\mu_{1_1 2}$ & $\mu_{1_1 3}$ & $\tau_{1_2}$ & $\lambda_2$ & $\mu_
 \end{tabular}
 }
 \vspace{2mm}
-\caption{This is a demonstration of non-identifiability of the likelihood for the BOS dataset. Two different parameter sets lead to approximately the same likelihood.}
 \end{table}
-\begin{figure}
+
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{ll_timetaken.pdf}
 \caption{Runtime and attained LL using BFGS algorithm to fit the BOS data, using 30 random starting values}
 \end{figure}
 
-
-We performed an hypothesis test with null hypothesis of HMM versus an alternative of HSMM by a modified likelihood ratio test based on Chen et al., 2001 (Appendix C). The value of the test statistic was 25.18. The test statistic has an approximate $\chi^2(2)$ distribution whose $95\%$ quantile is nearly $5.99$. Therefore, this shows strong evidence against the HMM model in favor of the HSMM model.
 
 Although, biologically, BOS is an irreversible disease, Titman and Sharples (2010) decided to include a BOS $\rightarrow$ healthy transition in their latent CTMC model. Titman \& Sharples recorded a likelihood ratio test in the standard CTMC HMM setup, whence there was support that including a BOS $\rightarrow$ healthy transition leads to significant improvement in fit. As an additional test, not reported by Titman and Sharples (2010), we decide whether to include BOS $\rightarrow$ healthy transition in the HSMM setup. That is we compare the null hypothesis of HSMM model without the BOS $\rightarrow$ healthy transition versus the alternative of an HSMM model with this transition. The test statistic is 9.038. The null hypothesis (the transition between BOS to healthy states has a rate of zero) is on the boundary of the parameter space; thus the distribution of the likelihood ratio test statistic is not a standard chi-square distribution, but rather a 50:50 mixture of a chi-square with 1 df and a point mass at zero (Self and Liang, 1987). The p-value for the LR test statistic was 0.0013, which supports the hypothesis that the reversible transition improves the fit within the latent disease framework.
 

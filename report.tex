@@ -155,7 +155,7 @@ It is noted that the final quantities of interest, first passage cumulative dist
 \paragraph{Parameter estimation and Computation}
 The authors kept only the nearest observation to a scheduled visit time and excluded others from analysis, for each patient, as an attempt to ensure non-informative sampling. The likelihood contribution for the individual based on the forward-backward algorithm is recorded in Equation \ref{eqn:likelihood} where now each $\bm{M}_i^*$ is a $5\times 5$ matrix and $\pi=(1-\pi_{2},0,\pi_{2},0,0)$ is taken as the initial probabilities.
 
-The 13 parameters are estimated by a maximum likelihood estimate (MLE) considering all patients. To check for global optimum, we computed the MLE from 30 random starting values. Full optimization was then performed starting at the best value among the 30 MLEs. Quasi-Newton method due to Broyden, Fletcher, Goldfarb and Shanno (BFGS, 1970) have been used to maximize likelihood and obtain point and interval estimates of the model parameters. It is noted that we require number of observations to be sufficiently large to have number of possible sequences of states exceeding the number of parameters to be estimated in the model.
+The 13 parameters are estimated by a maximum likelihood estimate (MLE) considering all patients. To check for global optimum, we computed the MLE from 30 random starting values. Full optimization was then performed starting at the best value among the 30 MLEs. We used the quasi-Newton algorithm due to Broyden, Fletcher, Goldfarb and Shanno (BFGS, 1970) to maximize likelihood and obtain point and interval estimates of the model parameters, with a default relative convergence tolerance of 'optim' ($10^{-8}$) and capped likelihood evaluations at $2500$.
 
 Hypothesis tests of significance of different parameters were performed  by using the penalised likelihood ratio test (Chen et al., 2001) to account for non-identifiability in the current setup. It has an approximate $\chi^2$ distribution. Since the setup becomes that of a HMM, the authors used a Pearson-type goodness of fit test for HMMs proposed by them (2008) to assess the overall fit of the data.
 \section{Results}
@@ -227,12 +227,11 @@ In Fig. 3d, we note that till before BOS onset, mortality rates are very low. Af
 
 In Fig. 4 we note that unlike the HSMM model, the HMM model did not show the detailed artifacts of the disease mortality rates which is backed by the medical literature.
 
-We computed the MLE by the HSMM model over 30 random starting values from independent Normal (mean=0,sd=0.25) (See Fig. 5). The median run-time of the HSMM optimization over 20 runs was 4393.5 seconds. Presence of more than one local maxima (Fig. 5), and, different parameter estimates (Table 2) leading to approximately same likelihood with same integer parts has been recorded. 
-
-\begin{table}
+We computed the MLE by the HSMM model over 30 random starting values from independent Normal (mean=0,sd=0.25) (See Fig. 5). The median run-time of the HSMM optimization over 30 runs was 4395.43 seconds. Presence of multiple local maxima where the algorithm converged (Fig. 5), and, non-identifiability that is, different parameters (Table 2) leading to approximately same likelihood with same integer parts has been recorded in the process.
+\begin{table}[b]
 \centering
 \resizebox{5.5 in}{!}{%
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{cccccccccccccc}
 \hline
 $\lambda_1$ & $\mu_{1_1 2}$ & $\mu_{1_1 3}$ & $\tau_{1_2}$ & $\lambda_2$ & $\mu_{2_1 1}$ & $\mu_{2_1 3}$ & $\tau_{2_2}$ & $e_{21}$ & $e_{12}^{HL}$ & $e_{12}^{DL}$ & $\pi_{HL}$ & $\pi_{DL}$ & $-LL$\\
 \hline
@@ -241,8 +240,16 @@ $\lambda_1$ & $\mu_{1_1 2}$ & $\mu_{1_1 3}$ & $\tau_{1_2}$ & $\lambda_2$ & $\mu_
 \hline
 \end{tabular}
 }
+\vspace{2mm}
 \caption{This is a demonstration of non-identifiability of the likelihood for the BOS dataset. Two different parameter sets lead to approximately the same likelihood.}
 \end{table}
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{ll_timetaken.pdf}
+\caption{Runtime and attained LL using BFGS algorithm to fit the BOS data, using 30 random starting values}
+\end{figure}
+
+
 
 A Pearson-type goodness of fit test (Titman \& Sharples; 2008, See Appendix D) for the HSMM  model stratified by transplant type (heart lung or double lung), observation number in an individual’s series ($\leq 6$ or $>6$), time elapsed since last observation (for observation number $\leq 6$, time elapsed categories : $\leq 0.44$ years, $> 0.44$ years. for observation number $> 6$ and time elapsed categories : $\leq 0.51$ years, $> 0.51$ years). The statistic had a value of 36.92. The null distribution of the statistic cannot be accurately calculated without bootstrapping, which would be time consuming for the current algorithm. However $\chi^2(D) (0.95)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells. In this case $D = 32$ which gives the upper bound as 46.2. Thus this test does not provide strong evidence in favor of poor fit.
 
@@ -256,7 +263,7 @@ In modelling panel observed finite state processes, the widely-used approach of 
 
 On the BOS dataset, the results from the HSMM model consisted of detailed artifacts of the disease process matching with the medical literature, unlike the HMM method. BIC, and Pearson-type goodness of fit test depicted strong evidence that HMM model has a low fit, but not so for the considered HSMM model. Test for HMM vs HSMM based on Chen et al (2001) also resulted in strong evidence in favor of HSMM. We also recorded evidence that in the latent model setup keeping the BOS $\rightarrow$ healthy transition improves fit of the model.
 
-The convergence of the BFGS algorithm for the data was slow, with a median runtime of 652.3 seconds. The maxima also depended upon starting values. It is also seen that not much effort is made in the Titman \& Sharples (2010) paper to obtain a global maximum of the likelihood surface. To embetter on this Lange \& Minin (2013) proposed an EM algorithm for this setup, which is efficient and robust and outperformed optimization methods, like Nelder-Mead and BFGS, for a slightly different BOS dataset.
+The convergence of the BFGS algorithm for the data was slow, with a median runtime of 4395.43 seconds. The maxima also depended upon starting values. It is also seen that not much effort is made in the Titman \& Sharples (2010) paper to obtain a global maximum of the likelihood surface. To embetter on this Lange \& Minin (2013) proposed an EM algorithm for this setup, which is efficient and robust and outperformed optimization methods, like Nelder-Mead and BFGS, for a slightly different BOS dataset.
 
 An advantage of latent CTMC models is their ability to approximate important functionals of disease processes like hazard functions from non-exponential sojourn time distributions. However, the authors record a general problem in panel observed setting. Due to the lack of information in the data, the transition intensities at times soon after entry into a state may be difficult to estimate because of the absence of consecutive observations in short time intervals leading to boundary maximum likelihood estimates. Similarly, when there is little evidence against a Markov model in the data optimization algorithms such as Nelder-Mead or Baum-Welch may fail to find the global maximum.
 
@@ -328,6 +335,10 @@ where $B_{\psi [k]} = \frac{\partial \lambda_{ij} (\psi)}{\partial \psi [k]}$. N
 \end{align*}
 using the expression for $\frac{\partial P_ij(t,psi)}{\partial \psi [k]}$ above, and noting that $P(t)= \exp(\Lambda t)$ and $\frac{\partial}{\partial t} P(t) = \exp(\Lambda t) \Lambda$.
 \subsection*{C : Modified LRT based on Chen, Chen, Kalbfleisch (2001)}
+The following penalised likelihood $pl(\theta)$ is maximized
+\[
+pl(\theta) = l(\theta) + \sum_{j}\sum_{r} (C_{r_j} \log \lambda_{r_j} - C_{r_j} \lambda_{r_j} \alpha_{r_j})
+\]
 \subsection*{D : Goodness of fit test for HMM, Titman \& Sharples (2008)}
 
 \end{document}

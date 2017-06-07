@@ -26,16 +26,18 @@
 %%\maketitle
 
 \begin{center}
-  {\LARGE Semi-Markov Models with Phase-Type Sojourn Distributions by A.C. Titman, L.D. Sharples, 2010}\\\ \\
+  {\LARGE A technical report on Semi-Markov Models with Phase-Type Sojourn Distributions}\\\ \\
   {Rahul Biswas \\ 
     Department of Statistics, University of Washington Seattle, WA, 98195, USA
   }
 \end{center}
 \nocite{*}
-\abstract{Finite state continuous-time processes, with data being observed at irregularly spaced discrete time points, and no data on the trajectory of the process between these times are often encountered in practice. }
+\section*{The paper}
+This report is based on \textit{Semi-Markov Models with Phase-Type Sojourn Distributions} written by Andrew C. Titman and Linda D. Sharples, and published in the Biometrics (Titman \& Sharples; 2010).
+
 \section{Introduction}
 
-Finite state continuous-time processes, with data being observed at irregularly spaced discrete time points, and no data on the trajectory of the process between these times (panel observed), are often encountered in practice. Examples are medical research on characterising the evolution of a disease within an individual (progressive disease like HIV (Longini \& Clark, 1989), or, episodic disease with recurrent transitions like asthma (Saint-Pierre et al., 2003)), when disease statuses are recorded only at clinic visits, and exact transition times are unknown (Dean et al., 2009; Mandel, 2010).
+Finite state continuous-time processes, with data being observed at irregularly spaced discrete time points, and no data on the trajectory of the process between these times (panel observed), are often encountered in practice. Examples include medical research on characterising the evolution of a disease within an individual (progressive disease like HIV (Longini \& Clark, 1989), or, episodic disease with recurrent transitions like asthma (Saint-Pierre et al., 2003)), when disease statuses are recorded only at clinic visits, and exact transition times are unknown (Dean et al., 2009; Mandel, 2010).
 %These histories can be conceptualized as consisting of waiting times (sojourns) in discrete states that individuals pass through according to progressive or reversible transitions; the final transition is to the absorbing state, death.
 Time-homogeneous continuous time Markov chains (CTMCs) are the simplest and most tractable models in such scenaria (Kalbfleisch and Lawless, 1985). However homogeneous CTMCs have limiting restrictions of transition intensities constant over time and thereby exponential sojourn distributions, which is often unrealistic.
 
@@ -214,7 +216,7 @@ No. pars & & & \multicolumn{2}{c}{9} & \multicolumn{2}{c}{13}\\
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.25]{mortcomp_hsmmhmm.pdf}
+\includegraphics[scale=0.33]{mortcomp_hsmmhmmkey.pdf}
 \caption{Mortality rate per year, as a function of state at $t_0$ for the HSMM and HMM models.}
 \end{figure}
 
@@ -242,7 +244,7 @@ $\lambda_1$ & $\mu_{1_1 2}$ & $\mu_{1_1 3}$ & $\tau_{1_2}$ & $\lambda_2$ & $\mu_
 \caption{This is a demonstration of non-identifiability of the likelihood for the BOS dataset. Two different parameter sets lead to approximately the same likelihood.}
 \end{table}
 
-A Pearson-type goodness of fit test (Titman \& Sharples; 2008, See Appendix D) for the HSMM  model stratified by transplant type (single lung or double lung), observation number in an individual’s series ($\leq 6$ or $>6$), time elapsed since last observation (for observation number $\leq 6$, time elapsed categories : $\leq 0.44$ years, $> 0.44$ years. for observation number $> 6$ and time elapsed categories : $\leq 0.51$ years, $> 0.51$ years). The statistic had a value of 36.92. The null distribution of the statistic cannot be accurately calculated without bootstrapping, which would be time consuming for the current algorithm. However $\chi^2(D) (0.95)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells. In this case $D = 32$ which gives the upper bound as 46.2. Thus this test does not provide strong evidence in favor of poor fit.
+A Pearson-type goodness of fit test (Titman \& Sharples; 2008, See Appendix D) for the HSMM  model stratified by transplant type (heart lung or double lung), observation number in an individual’s series ($\leq 6$ or $>6$), time elapsed since last observation (for observation number $\leq 6$, time elapsed categories : $\leq 0.44$ years, $> 0.44$ years. for observation number $> 6$ and time elapsed categories : $\leq 0.51$ years, $> 0.51$ years). The statistic had a value of 36.92. The null distribution of the statistic cannot be accurately calculated without bootstrapping, which would be time consuming for the current algorithm. However $\chi^2(D) (0.95)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells. In this case $D = 32$ which gives the upper bound as 46.2. Thus this test does not provide strong evidence in favor of poor fit.
 
 We performed an hypothesis test with null hypothesis of HMM versus an alternative of HSMM by a modified likelihood ratio test based on Chen et al., 2001 (Appendix C). The value of the test statistic was 25.18. The test statistic has an approximate $\chi^2(2)$ distribution whose $95\%$ quantile is nearly $5.99$. Therefore, this shows strong evidence against the HMM model in favor of the HSMM model.
 
@@ -286,7 +288,7 @@ Now for $0\leq m\leq n-1, j\in S$,
 &=\sum_{i=1}^{|S|} \mathbf{P}(O_{t_0}=o_0,\ldots,O_{t_{m+1}}=o_{m+1},X_{t_m}=i,X_{t_{m+1}}=j)\\
 &=\sum_{i=1}^{|S|}\mathbf{P} (O_{t_{m+1}}=o_{m+1}|X_{t_{m+1}}|=j) \mathbf{P}(X_{t_{m+1}}=j|X_{t_m}=i)\\
 & \qquad \mathbf{P}(O_{t_0}=o_0,\ldots,O_{t_{m+1}}=o_{m+1},X_{t_m}=i)\\
-&\mbox{ (Markov property of } X(t) \mbox{, and transition diagram of HMM has dependence of } O(t) \mbox{ only on } X(t))\\
+&\mbox{ (Markov property of } X(t) \mbox{, and transition diagram of HMM})\\
 &=\sum_{i=1}^{|S|} e_{j o_{m+1}} p_{ij}(t_{m+1}-t_m) \alpha_m(i)\\
 &=\left[\sum_{i=1}^{|S|}\alpha_m(i)p_{ij}(t_{m+1}-t_m)\right]e_{j o_{m+1}}\\
 &=\left(\alpha_m(1),\ldots,\alpha_m(|S|)\right) \left(\begin{matrix}

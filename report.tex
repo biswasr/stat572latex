@@ -13,7 +13,7 @@
 \usepackage{color}
 \usepackage{amsmath}
 \usepackage{makecell}
-
+\allowdisplaybreaks
   %\bibliographystyle{plainnat}		  %\bibliographystyle{plainnat}
   		  
 
@@ -228,7 +228,13 @@ In Fig. 3d, we note that till before BOS onset, mortality rates are very low. Af
 In Fig. 4 we note that unlike the HSMM model, the HMM model did not show the detailed artifacts of the disease mortality rates which is backed by the medical literature.
 
 We computed the MLE by the HSMM model over 30 random starting values from independent Normal (mean=0,sd=0.25) (See Fig. 5). The median run-time of the HSMM optimization over 30 runs was 4395.43 seconds. Presence of multiple local maxima where the algorithm converged (Fig. 5), and, non-identifiability that is, different parameters (Table 2) leading to approximately same likelihood with same integer parts has been recorded in the process.
-\begin{table}[b]
+
+
+
+A Pearson-type goodness of fit test (Titman \& Sharples; 2008, See Appendix D) for the HSMM  model stratified by transplant type (heart lung or double lung), observation number in an individual’s series ($\leq 6$ or $>6$), time elapsed since last observation (for observation number $\leq 6$, time elapsed categories : $\leq 0.44$ years, $> 0.44$ years. for observation number $> 6$ and time elapsed categories : $\leq 0.51$ years, $> 0.51$ years). The statistic had a value of 36.92. The null distribution of the statistic cannot be accurately calculated without bootstrapping, which would be time consuming for the current algorithm. However $\chi^2(D) (0.95)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells. In this case $D = 32$ which gives the upper bound as 46.2. Thus this test does not provide strong evidence in favor of poor fit. The goodness of fit test in the HMM setup gives evidence for a poor fit with test statistic of 96.81 on $\chi^2_{24}$ distribution.
+
+
+\begin{table}
 \centering
 \resizebox{5.5 in}{!}{%
 \begin{tabular}{cccccccccccccc}
@@ -245,13 +251,10 @@ $\lambda_1$ & $\mu_{1_1 2}$ & $\mu_{1_1 3}$ & $\tau_{1_2}$ & $\lambda_2$ & $\mu_
 \end{table}
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{ll_timetaken.pdf}
+\includegraphics[scale=0.6]{ll_timetaken.pdf}
 \caption{Runtime and attained LL using BFGS algorithm to fit the BOS data, using 30 random starting values}
 \end{figure}
 
-
-
-A Pearson-type goodness of fit test (Titman \& Sharples; 2008, See Appendix D) for the HSMM  model stratified by transplant type (heart lung or double lung), observation number in an individual’s series ($\leq 6$ or $>6$), time elapsed since last observation (for observation number $\leq 6$, time elapsed categories : $\leq 0.44$ years, $> 0.44$ years. for observation number $> 6$ and time elapsed categories : $\leq 0.51$ years, $> 0.51$ years). The statistic had a value of 36.92. The null distribution of the statistic cannot be accurately calculated without bootstrapping, which would be time consuming for the current algorithm. However $\chi^2(D) (0.95)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells. In this case $D = 32$ which gives the upper bound as 46.2. Thus this test does not provide strong evidence in favor of poor fit.
 
 We performed an hypothesis test with null hypothesis of HMM versus an alternative of HSMM by a modified likelihood ratio test based on Chen et al., 2001 (Appendix C). The value of the test statistic was 25.18. The test statistic has an approximate $\chi^2(2)$ distribution whose $95\%$ quantile is nearly $5.99$. Therefore, this shows strong evidence against the HMM model in favor of the HSMM model.
 
@@ -289,13 +292,14 @@ Let $S$ to be the finite state space of continuous time HMM $(O(t),X^*(t))$ with
 \[
 \alpha_0(i)=\pi_i e_{i~ o_0}
 \]
+
 Now for $0\leq m\leq n-1, j\in S$,
 \begin{align*}
 \alpha_{m+1}(j)&=\mathbf{P}(O_{t_0}=o_o,\ldots, O_{t_{m+1}}=o_{m+1},X^*_{t_{m+1}}=i)\\
 &=\sum_{i=1}^{|S|} \mathbf{P}(O_{t_0}=o_0,\ldots,O_{t_{m+1}}=o_{m+1},X_{t_m}=i,X_{t_{m+1}}=j)\\
 &=\sum_{i=1}^{|S|}\mathbf{P} (O_{t_{m+1}}=o_{m+1}|X_{t_{m+1}}|=j) \mathbf{P}(X_{t_{m+1}}=j|X_{t_m}=i)\\
 & \qquad \mathbf{P}(O_{t_0}=o_0,\ldots,O_{t_{m+1}}=o_{m+1},X_{t_m}=i)\\
-&\mbox{ (Markov property of } X(t) \mbox{, and transition diagram of HMM})\\
+&\mbox{ (Markov property of } X(t) \mbox{, and emission-transition diagram of HMM})\\
 &=\sum_{i=1}^{|S|} e_{j o_{m+1}} p_{ij}(t_{m+1}-t_m) \alpha_m(i)\\
 &=\left[\sum_{i=1}^{|S|}\alpha_m(i)p_{ij}(t_{m+1}-t_m)\right]e_{j o_{m+1}}\\
 &=\left(\alpha_m(1),\ldots,\alpha_m(|S|)\right) \left(\begin{matrix}

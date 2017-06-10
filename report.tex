@@ -322,9 +322,9 @@ Therefore, since we have likelihood $L=P(O_{t_0}=o_0,\ldots,O_{t_n}=o_n)=\sum_{i
 L=\left(\pi_1^*,\ldots,\pi_{|S|}^*\right) M_1\ldots M_n \mathbf{1} = \pi M_1\ldots M_n \mathbf{1},
 \] where $\pi=\left(\pi_1^*,\ldots,\pi_{|S|}^*\right)$.
 \subsection*{B : Delta method standard errors of disease process functionals}
-Suppose $\psi$ is a $p\times 1$ vector of latent model parameters with MLE $\hat{\psi}$, and $F(\psi, t)$ is a one-dimensional functional. Let $\nabla F (\hat{ψ}, t)$ be the $p \times 1$ gradient of $F (\psi, t)$ with respect to $\psi$ evaluated at $\hat{\psi}$. By the functional delta method, the asymptotic distribution of the functional estimates $F(\hat{\psi},t)$ is normal with mean $F(\psi,t)$ and an approximate covariance matrix given by
+Suppose $\psi$ is a $p\times 1$ vector of latent model parameters with MLE $\hat{\psi}$, and $F(\psi, t)$ is a one-dimensional functional. Let $\nabla F (\hat{\psi}, t)$ be the $p \times 1$ gradient of $F (\psi, t)$ with respect to $\psi$ evaluated at $\hat{\psi}$. By the functional delta method, the asymptotic distribution of the functional estimates $F(\hat{\psi},t)$ is normal with mean $F(\psi,t)$ and an approximate covariance matrix given by
 \[
-Cov(F(\hat{\psi},t))=\nabla F(\hat{\psi},t)T Cov(\hat{\psi},t)\nabla F(\hat{\psi},t).
+Cov(F(\hat{\psi},t))=\nabla F(\hat{\psi},t)^T Cov(\hat{\psi},t)\nabla F(\hat{\psi},t).
 \]
 
 Functionals such as CDFs, hazard functions, and transition probabilities are related to transition intensity by the matrix exponential. Thus the expression of derivative of $\exp(\Lambda(\psi)t)$ with respect to entries of $\psi$ would be useful for this. These derivative involve similar integrals as first moments of occupancy durations and transition counts and are computed with similar methods (Najfeld, Havel; 1994). For example, consider the functional $P_{ij}(t,\psi) = \exp (\Lambda(\psi)t)_{ij}$. Then $\frac{\partial P_ij(t,psi)}{\partial \psi [k]}$ is the $i,j$th entry of the matrix given by \[\int_{0}^t \exp (\Lambda (\psi) \tau) B_{\psi [k]} \exp (\Lambda (\psi) (t-\tau)) d \tau\] 

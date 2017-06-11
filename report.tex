@@ -15,7 +15,7 @@
 \usepackage{makecell}
 \allowdisplaybreaks
   %\bibliographystyle{plainnat}		  %\bibliographystyle{plainnat}
-  		  
+
 
 \newcommand{\vmdel}[1]{\sout{#1}}
 \newcommand{\vmadd}[1]{\textbf{\color{red}{#1}}}
@@ -158,7 +158,7 @@ The 13 parameters are estimated by a maximum likelihood estimate (MLE) consideri
 Hypothesis tests of significance of different parameters were performed  by using the penalised likelihood ratio test (Chen et al., 2001) to account for non-identifiability in the current setup. It has an approximate $\chi^2$ distribution. Since the setup becomes that of a HMM, the authors used a Pearson-type goodness of fit test for HMMs proposed by them (2008) to assess the overall fit of the data.
 
 \section{Results}
-The model parameter estimates are similar, but not identical to those obtained by Titman and Sharples (2010), because of differences between the two datasets. Table 1 shows MLEs and 95\% confidence intervals for the parameters of the model found by the BFGS algorithm. The MLEs were unique on the basis of numerical investigations with different starting values. In both the HMM and HSMM, $\mu_{1_1 3}<\mu_{2_1 3}$ showing that as expected the transition rate to death is estimated to be higher for patients with BOS than those without. The BIC depicts a better fit for the HSMM model.
+The model parameter estimates are similar, but not identical to those obtained by Titman and Sharples (2010), because of differences between the two datasets. Table 1 shows MLEs and 95\% confidence intervals for the parameters of the model found by the BFGS algorithm. In both the HMM and HSMM, $\mu_{1_1 3}<\mu_{2_1 3}$ showing that as expected the transition rate to death is estimated to be higher for patients with BOS than those without. The BIC depicts a better fit for the HSMM model.
 
 \begin{table}[b!]
 \centering
@@ -199,9 +199,7 @@ No. pars & & & \multicolumn{2}{c}{9} & \multicolumn{2}{c}{13}\\
 
 \end{table}
 
-We computed the MLE by the HSMM model over 20 random starting values from independent Normal (mean=0,sd=0.25) (See Fig. 3). The median run-time of the HSMM optimization over 30 runs was 4394.47 seconds for the NM and 2676.755 seconds for the BFGS algorithm. NM was particularly poor at converging to either a local or global maxima and reached the iteration limit 16/20 times. BFGS converged to a local maxima in 17/20 trials. Also, the NM algorithm was relatively slower (Fig. 3). Presence of multiple local maxima where the algorithm converged (Fig. 3), and, non-identifiability that is, different parameters leading to approximately same likelihood (Table 2) has been recorded in this process. 
-
-
+We computed the MLE by the HSMM model over 20 random starting values from independent Normal (mean=0,sd=0.25) (See Fig. 3). The median run-time of the HSMM optimization over 30 runs was 4394.47 seconds for the NM and 2676.755 seconds for the BFGS algorithm. NM was particularly poor at converging to either a local or global maxima and reached the iteration limit 16/20 times. BFGS converged to a local maxima in 17/20 trials. Also, the NM algorithm was relatively slower (Fig. 3). Presence of multiple local maxima where the algorithm converged (Fig. 3), and, non-identifiability that is, different parameters leading to approximately same likelihood (Table 2) has been recorded in this process.
 
 \begin{table}[t]
 \centering
@@ -239,7 +237,7 @@ The first passage CDF for BOS development is reported in Fig. 4a. The probabilit
 \end{figure}
 \begin{figure}[t]
 \centering
-\includegraphics[scale=0.4]{mortcomp_hsmmhmmkey.pdf}
+\includegraphics[scale=0.4]{mortcomp_hsmmhmm.pdf}
 \caption{Mortality rate per year, as a function of state at $t_0$ for the HSMM and HMM models.}
 \end{figure}
 
@@ -351,10 +349,10 @@ Note that one could use an asymptotic $\chi^2_{R-1}$ distribution to obtain crit
 \subsection*{D : Goodness of fit test for HMM, Titman \& Sharples (2008)}
 Let each allowable transition the data were partitioned by observation number (in the sequence of observations for an individual) into observation categories, $h$, and, within each observation category, by time interval category, $l_h$. Additionally, patients are grouped by covariate, $c$, according to quantiles of the transition intensity $\Lambda$. Then, for transitions, $r\rightarrow s$, for a patient with observations at times $t_j, j=1,...,n$, the observed and expected cell counts are calculated as
 \[
-ohl_h rsc = \sum \mathbf{1} \left[ X(t_{j+1})=s,X(t_j)=r \right]
+o_{hl_h rsc} = \sum \mathbf{1} \left[ X(t_{j+1})=s,X(t_j)=r \right]
 \]
 \[
-ehl_h rsc = \sum \mathbf{P} (X(t_{j+1})=s|X(t_j)=r)
+e_{hl_h rsc} = \sum \mathbf{P} (X(t_{j+1})=s|X(t_j)=r)
 \]
 with the summation over the set of all patients satisfying covariate group $c$, and $j$ s.t. $t_{j+1}-t_j \in l_h$. Here
 \[
@@ -363,7 +361,7 @@ with the summation over the set of all patients satisfying covariate group $c$, 
 and $\hat{\xi}_{r_j}$ is the $j$th entry of \[\hat{\xi}_r=\frac{\pi M_1 M_2 \ldots M_{k-1}}{\pi M_1 M_2 \ldots M_{k-1} \mathbf{1}}.\]
 Then the test statistic is 
 \[
-T=\sum_{h}\sum_{l_h}\sum_{r}\sum_{s}\sum_{c}\frac{(o_{hl_h rsc}-ehl_h rsc)^2}{e_{hl_h rsc}}
+T=\sum_{h}\sum_{l_h}\sum_{r}\sum_{s}\sum_{c}\frac{(o_{hl_h rsc}-e_{hl_h rsc})^2}{e_{hl_h rsc}}
 \]
 For testing in the Markov setup, the statistic $T$ has an asymptotic $\chi^2$ distribution. The null distribution of $T$ cannot be accurately calculated without bootstrapping, which can be time consuming. However the $95\%$ quantile of $\chi^2(D)$ is an upper bound to the $95\%$ quantile of the statistic (Titman \& Sharples; 2008), where $D$ denotes the number of independent cells, using which we can decide upon the hypotheses.
 \end{document}

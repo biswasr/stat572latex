@@ -27,11 +27,14 @@
     \hspace{1em}%
     \insertframenumber/\inserttotalframenumber
 }
-\title{Semi-Markov Models with Phase-Type Sojourn Distributions, by Titman, A.C. \& Sharples L.D.}
+\title{Semi-Markov Models with Phase-Type Sojourn Distributions}
 \author{Rahul Biswas}
 \institute{Department of Statistics, University of Washington, Seattle}
 \begin{document}
 \maketitle
+\begin{frame}{The paper}
+\textit{Semi-Markov Models with Phase-Type Sojourn Distributions} written by Andrew C. Titman and Linda D. Sharples, and published in the Biometrics in 2010.
+\end{frame}
 \begin{frame}{Example data context}
 \includegraphics[scale=0.41]{figprocessAndsampling5.png}
 \hspace{3mm}
@@ -77,6 +80,7 @@ L(\theta) = \prod_{i=1}^n p_{x_{i-1},x_i} (t_{i-1},t_i;\theta)
 \begin{frame}
 \begin{itemize}
 \item Advantage : Simple and computationally tractable
+\vspace{3mm}
 \item Disadvantage : The transition intensities are constant over time and the distribution of sojourn time in a state is always exponential, these assumptions are often unrealistic.
 \end{itemize}
 \end{frame}
@@ -103,7 +107,8 @@ Inhomogeneous CTMC is defined by the time dependent transition intensities \[\la
 \begin{frame}{Problems in fitting of Semi-Markov models}
 \begin{itemize}
 \item Likelihood is not tractable if allowing reversible transitions. \citep{chen2004semi,foucher2010flexible}
-\item Allowing reversible transitions shown tractable under stringent restrictions : \\- If evenly spaced two-state recurrent model \citep{rosychuk2001semi}\\- If at least one state has exponential sojourn distribution \citep{kang2007statistical}.
+\vspace{3mm}
+\item Allowing reversible transitions shown tractable under stringent restrictions : \\ \vspace{1mm} - If evenly spaced two-state recurrent model \citep{rosychuk2001semi}\\ \vspace{1mm}- If at least one state has exponential sojourn distribution \citep{kang2007statistical}.
 \end{itemize}
 \end{frame}
 %\begin{frame}{Hope}
@@ -115,19 +120,22 @@ Inhomogeneous CTMC is defined by the time dependent transition intensities \[\la
 %\end{frame}
 \begin{frame}{Titman \& Sharples (2010)}
 \begin{itemize}
-\item Proposed a general approach to semi-Markov modeling and fitting to panel observed processes using a latent state CTMC.
-\item Each state maps to multiple latent states, which are traversed according to an underlying CTMC.
-\item This framework yields rates of transition between states that depend on the duration spent in that state, yet likelihoods are analytically tractable, even for disease processes with reversible transitions.
-\item The model is extended to incorporate misclassification error.
-\item Methods for inference of parameters while addressing non-identifiability concerns
+\item A general approach to semi-Markov modeling and fitting to panel observed processes using a latent state CTMC.\vspace{2mm}
+\item Each state maps to multiple latent states, which are traversed according to an underlying CTMC.\vspace{2mm}
+\item This framework yields transition rates between states dependent on the duration spent in that state, yet, likelihoods are analytically tractable, even for disease processes with reversible transitions.\vspace{2mm}
+\item The model is extended to incorporate misclassification error.\vspace{2mm}
+\item Methods for inference of parameters while addressing non-identifiability concerns.
 
 \end{itemize}
 \end{frame}
 \begin{frame}{Details of the model}
 \begin{itemize}
-\item $X(t)$ denotes a continuous time stochastic process with state space $\{1,\ldots, R\}$, where $t$ is time since process origin. Let $R$ be the only absorbing state. 
-\item Underlying $X(t)$ there is the latent homogeneous CTMC $X^*(t)$ with latent state space $\{1_1,\ldots1_{s_1}\}\cup \ldots \cup \{(R-1)_1,\ldots (R-1)_{s_{R-1}} \cup R\} $. $X(t)=r \Leftrightarrow X^*(t) \in \{r_1,\ldots r_{s_r}\}$ for $r<R$ and $X(t)=R \Leftrightarrow X^*(t) =R$. 
-\item The sojourn distribution of each non-absorbing state $r$ of $X(t)$ is assumed to be a $k$-phase Coxian phase-type distribution, which defined as the distribution of absorption time of a progressive CTMC with $k$ transient states and one absorbing state. 
+\item $X(t)$ denotes a continuous time stochastic process with state space $\{1,\ldots, R\}$, where $t$ is time since process origin. $R$ be the only absorbing state. 
+\vspace{2mm}
+\item Underlying $X(t)$ there is the latent homogeneous CTMC $X^*(t)$ with latent state space \vspace{-2mm} \[  \{1_1,\ldots1_{s_1}\}\cup \ldots \cup \{(R-1)_1,\ldots (R-1)_{s_{R-1}} \cup R\},\] $X(t)=r \Leftrightarrow X^*(t) \in \{r_1,\ldots r_{s_r}\}$ for $r<R$ and $X(t)=R \Leftrightarrow X^*(t) =R$. 
+\vspace{2mm}
+\item The sojourn distribution of each non-absorbing state $r$ of $X(t)$ is assumed to be a $k$-phase Coxian phase-type distribution, which is defined as the distribution of absorption time of a progressive CTMC with $k$ transient states and one absorbing state.
+\vspace{2mm}
 \item The transition diagram of the underlying process is illustrated in Figure.
 %\item Thus for observable state $r$, the latent process $X^* (t)$ can have the states $r_1,\ldots,r_k$,  with parameters $\lambda_{r_j} =$ the intensity for movement from $r_j$ to $r_{j+1}$, for $j=1,\ldots, k-1$, with the assumption that these latent phases for each observable state is progressive thereby all other transitions between $r_j$'s have $0$ intensity, and $\mu_{r_j s}=$, the intensity for movement out of a latent phase of $r_j$ to state $s$ with the assumption that any state $s$ is entered only at latent phase $s_1$, thereby all other intensities for transition from latent phases of $r$ to latent phases of $s$ are $0$. Figure 1 summarizes the transition diagram for transitions between latent phases of observable state r and transition out to observable state s. 
 
@@ -150,8 +158,8 @@ Inhomogeneous CTMC is defined by the time dependent transition intensities \[\la
 \end{frame}
 \begin{frame}
 \begin{itemize}
-\item For greater estimability and interpretation of moving out of a state to another it is assumed that $\mu_{r_j s} = \tau_{r_j} \mu_{r_1 s} \forall s$, $\tau_{r_1}=1$. %That is rates of exiting from latent phase $r_j$ relative to $r_1$ change by the same factor irrespective of destination. 
-\item It is noted that the resulting $X(t)$ is a semi-Markov process.
+\item For greater estimability by reducing number of free parameters, it is assumed that $\mu_{r_j s} = \tau_{r_j} \mu_{r_1 s} \forall s$, $\tau_{r_1}=1$. %That is rates of exiting from latent phase $r_j$ relative to $r_1$ change by the same factor irrespective of destination. 
+\item The resulting $X(t)$ is a semi-Markov process.
 \item To incorporate misclassification, observed states are O(t) with misclassification probability : $e_{rs}=P(O(t)=s|X(t) =r)=P(O(t)=s|X^* (t) =r_j)= e^*_{r_j s}$ for $r,s = 1,\ldots,R$, $j=1,\ldots, k$. 
 \item The process $(O(t), X^*(t))$ is a Hidden Markov Model (HMM). Thereby computational methods tailored for statistical analysis of HMM can be used for inference.
 \item Since $X(t)$ is semi-Markov, the process $(O(t),X(t))$ is termed as a Hidden semi-Markov Model (HSMM).
@@ -170,7 +178,8 @@ where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s
 \end{frame}
 \begin{frame}
 \begin{itemize}
-\item Quasi-Newton method due to Broyden, Fletcher, Goldfarb and Shanno (BFGS, 1970) and, Nelder and Mead's (NM, 1965) algorithm have been used to maximize likelihood and obtain point and interval estimates of the model parameters.
+\item The likelihood is maximized by a quasi-Newton method due to Broyden, Fletcher, Goldfarb and Shanno (BFGS, 1970) and, point and interval estimates of the model parameters are obtained.
+
 \item Final quantities of interest, first passage cumulative distribution function, transition probabilities, hazard rates and survival probabilities are one-dimensional functionals of the parameter vector of the latent CTMC. \vspace{0.8mm} \\Point and interval estimates transferred using Delta method.
 \end{itemize}
 \end{frame}
@@ -196,9 +205,12 @@ where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s
 \begin{frame}{BOS dataset}
 \begin{itemize}
 \item Bronchiolitis obliterans syndrome (BOS) is the irreversible progressive narrowing of bronchiolar lumens and airflow obstruction \citep{todd2011bronchiolitis}, leading to impaired lung function.
+\vspace{2mm}
 \item It is recorded to affect a majority of lung transplant recipients and is the principal factor limiting long-term transplant survival.
-\item The dataset includes 364 post-lung-transplant patients who received transplants at Papworth Hospital between 1984 and 2006, with 242 heart-lung transplant and 122 both-lung trasnplant patients. 
-\item Patients were scheduled to for visit at 9 months, 12 months, after that at 6 month intervals, but actual visit times were highly irregular, and can be of different number
+\vspace{2mm}
+\item The dataset includes 364 post-lung-transplant patients who received transplants at Papworth Hospital (England) between 1984 and 2006, with 242 heart-lung transplant and 122 both-lung trasnplant patients. 
+\vspace{2mm}
+\item Patients were scheduled for visit at 9 months, 12 months, after that at 6 month intervals, but actual visit times were highly irregular, and can be of different number.
 \end{itemize}
 \end{frame}
 
@@ -207,7 +219,6 @@ where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s
 \hspace{3mm}
 \includegraphics[scale=0.25]{datatransitions.png}
 \end{frame}
-
 
 \begin{frame}
 \begin{itemize}
@@ -219,10 +230,11 @@ where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s
 
 \begin{frame}{Computation results}
 \begin{itemize}
-
-\item Default relative convergence tolerance of 'optim' ($10^{-8}$) and number of likelihood evaluations limited at $2500$ for both Broyden, Fletcher, Goldfarb and Shanno (BFGS, 1970), and, Nelder and Mead's (NM, 1965) algorithm.
-
-\item To check for global optimum and run-time, we computed the MLE for each algorithm with 20 random starting values from independent Normal (mean=0,sd=0.25).
+\item We compared Broyden, Fletcher, Goldfarb and Shanno (BFGS, 1970), and, Nelder and Mead's (NM, 1965) algorithm for computaton.
+\vspace{2mm}
+\item Default relative convergence tolerance of 'optim' ($10^{-8}$) and number of likelihood evaluations limited at $2500$ for both algorithm.
+\vspace{2mm}
+\item To check for global optimum and time taken, we computed the MLE with 20 random starting values from independent Normal (mean=0,sd=0.25) for each algorithm.
 \end{itemize}
 \end{frame}
 \begin{frame}
@@ -234,9 +246,11 @@ where $\bm{M}_i^*$ is a $\{k(R-1) +1\} \times \{k(R-1) +1\}$ matrix with $(r^*,s
 \end{frame}
 \begin{frame}
 \begin{itemize}
-\item The median run-time of the HSMM optimization over 30 runs was 4394.47 seconds for the NM and 2676.755 seconds for the BFGS algorithm.
-\item NM was particularly poor at converging to either a local or global maxima and reached the iteration limit 16/20 times. BFGS converged to a local maxima in 17/20 trials.
-\item Presence of multiple local maxima where the algorithm converged, and, non-identifiability that is, different parameters leading to approximately same likelihood has been recorded in this process.
+\item Median run-time of the HSMM optimization over 20 runs :\\ \vspace{2mm} 4394.47 seconds for the NM and\\ \vspace{2mm} 2676.755 seconds for the BFGS algorithm.
+\vspace{3mm}
+\item NM was particularly poor at converging to either a local or global maxima and reached the iteration limit 16/20 times.\\ \vspace{2mm} BFGS converged to a local maxima in 17/20 trials.
+\vspace{3mm}
+\item Multiple local maxima where the algorithm converged are obtained, and, \\ \vspace{2mm} Non-identifiability that is, different parameters leading to approximately same likelihood has been recorded in this process.
 \end{itemize}
 \end{frame}
 
@@ -353,23 +367,32 @@ No. pars & & & \multicolumn{2}{c}{9} & \multicolumn{2}{c}{13}\\
 \begin{figure}
 \centering
 \includegraphics[scale=0.25]{mortcomp_hsmmhmm.pdf}
-\caption{Unlike the HSMM model, the HMM model did not show the detailed artifacts of the disease mortality rates backed by the medical literature.}
+\caption{Mortality rate per year, as a function of state at $t_0$ for the HSMM and HMM models.}
 \end{figure}
 \end{frame}
 \begin{frame}{Hypothesis tests}
 \begin{itemize}
-\item Goodness of Fit test \citep{titman2008general} : At 95\% level, evidence in favor of good fit of the HSMM model. The statistic is recorded to have a value 31.09, which is rejected under null distribution, under which $\chi^2(32) (0.95)=46.2$ is an upper bound to the $95\%$ quantile. At level 95\%, evidence in favor of poor fit of HMM model, with test statistic being 96.81 on $\chi^2_{24}$ distribution.
-\item Null hypothesis of HMM vs. alternative of HSMM (Modified likelihood ratio test based on \cite{chen2001modified}) : The value of the test statistic was 25.18. The test statistic has an approximate $\chi^2(2)$ distribution whose $95\%$ quantile is nearly $5.99$. Therefore, this shows strong evidence against the HMM model in favor of the HSMM model.
+\item Goodness of Fit test \citep{titman2008general} : At level 5\%, evidence in favor of good fit of the HSMM model.\\ \vspace{2mm}  The value of the statistic is 31.09,  while under null $\chi^2_{(32)} (0.95)=46.2$ is an upper bound to the $95\%$ quantile.\\ \vspace{2mm} 
+At level 5\%, evidence in favor of poor fit of HMM model, with test statistic being 96.81 on $\chi^2_{(24)}$ distribution.\vspace{3mm}
+\item $H_0$ : HMM vs. $H_1$ : HSMM (\cite{chen2001modified}) : Strong evidence against the HMM model in favor of the HSMM model.\\ \vspace{2mm} The value of the test statistic was 25.18.\\ \vspace{2mm} The test statistic has an approximate $\chi^2_{(2)}$ distribution whose $95\%$ quantile is about $5.99$.
+\end{itemize}
+\end{frame}
+\begin{frame}{Reversible transitions?}
+\begin{itemize}
+\item Biologically, BOS is an irreversible disease.
+\vspace{3mm}
+\item Yet Titman and Sharples (2010) included a BOS $\rightarrow$ healthy transition in their latent CTMC model, providing evidence from a likelihood ratio test in the HMM setup.
+\vspace{3mm}
+\item We tested for evidence to include BOS $\rightarrow$ healthy transition in the HSMM setup. \\ \vspace{2mm} That is $H_0$ : HSMM model with the BOS $\rightarrow$ healthy transition rate $0$ vs. $H_1$ : HSMM model with this transition rate $>0$. \\ \vspace{2mm} We use a likelihood ratio test.
 \end{itemize}
 \end{frame}
 \begin{frame}
 \begin{itemize}
-\item Biologically, BOS is an irreversible disease.
-\item Yet Titman and Sharples (2010) included a BOS $\rightarrow$ healthy transition in their latent CTMC model, based on recording a likelihood ratio test in the standard CTMC HMM setup, whence there was support in favor of including a BOS $\rightarrow$ healthy transition.
-\item We test whether to include BOS $\rightarrow$ healthy transition in the HSMM setup. That is we compare the null hypothesis of HSMM model with the BOS $\rightarrow$ healthy transition rate 0 versus the alternative of an HSMM model with this transition rate positive. 
-\item The test statistic is 9.038. 
-\item The null hypothesis is on the boundary of the parameter space; thus the distribution of the likelihood ratio test statistic is a 50:50 mixture of a chi-square with 1 df and a point mass at zero \cite{self1987asymptotic}. 
-\item The p-value for the LR test statistic was 0.0013, which is evidence in favor of including the reversible transition.
+\item The value of the test statistic is 9.038.
+\vspace{3mm}
+\item The null hypothesis is on the boundary of the parameter space; thus the distribution of the likelihood ratio test statistic is a 50:50 mixture of a chi-square with 1 df and a point mass at zero. \citep{self1987asymptotic}
+\vspace{3mm}
+\item The p-value for the test was 0.0013, which is evidence in favor of including the reversible transition.
 \end{itemize}
 \end{frame}
 %\begin{frame}[allowframebreaks]
@@ -387,6 +410,7 @@ No. pars & & & \multicolumn{2}{c}{9} & \multicolumn{2}{c}{13}\\
 \item Incorporating misclassification error
 \item A general approach for inference of parameters addressing non-identifiability and testing significance and fit.
 \item Application of the method to assess development of bronchilitis obliterans syndrome in post-lung-transpantation patients, making comparison with standard HMM.
+\item Detailed artifacts of disease process matching with biological literature, better fit and, evidence in support, obtained by the proposed model in contrast to standard HMM.
 \end{itemize}
 \end{frame}
 %\begin{frame}
